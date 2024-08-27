@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+}
+
+.form label {
+  margin-bottom: calc(var(--padding) / 4);
+}
+
+.form input {
+  padding: var(--padding);
+  margin-bottom: var(--padding);
+}
+
+.form button {
+  padding: var(--padding);
+  font-weight: 600;
+}
+
+.error {
+  color: brown;
+  margin-top: var(--padding);
+  text-align: center;
+}

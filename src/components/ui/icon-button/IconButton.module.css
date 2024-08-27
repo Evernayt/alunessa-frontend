@@ -1,0 +1,21 @@
+.base {
+  min-height: 48px;
+  max-height: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  background-color: black;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.base:active {
+  transform: scale(0.98);
+}
+
+.ghost {
+  background-color: transparent;
+}

@@ -1,0 +1,35 @@
+.container {
+  height: 70vh;
+  width: 60vw;
+  background-color: white;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form label {
+  margin-bottom: calc(var(--padding) / 4);
+}
+
+.form textarea {
+  padding: var(--padding);
+  margin-bottom: var(--padding);
+  height: 100%;
+  font-size: 16px;
+  resize: none;
+}
+
+.controls {
+  display: flex;
+  gap: var(--padding);
+}
+
+.form button {
+  padding: var(--padding);
+  font-weight: 600;
+}

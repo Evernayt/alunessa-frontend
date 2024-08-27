@@ -1,0 +1,52 @@
+.container {
+  height: 40vh;
+  width: 60vw;
+  background-color: white;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.image {
+  min-height: 48px;
+  max-height: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--padding);
+}
+
+.form label {
+  margin-bottom: calc(var(--padding) / 4);
+}
+
+.form input {
+  padding: var(--padding);
+  margin-bottom: var(--padding);
+  font-size: 16px;
+}
+
+.form input[type="file"] {
+  padding: 0;
+}
+
+.controls {
+  display: flex;
+  gap: var(--padding);
+  margin-bottom: 0;
+  margin-top: auto;
+}
+
+.form button {
+  padding: var(--padding);
+  font-weight: 600;
+}

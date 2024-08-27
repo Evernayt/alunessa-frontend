@@ -1,0 +1,27 @@
+.list {
+  padding: var(--padding);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: var(--padding);
+}
+
+.dragged {
+  border: 3px solid orange;
+  cursor: grabbing;
+}
+
+.item {
+  user-select: none;
+  cursor: grab;
+  position: relative;
+}
+
+.item img {
+  pointer-events: none;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}

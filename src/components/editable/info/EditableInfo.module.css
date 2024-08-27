@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: var(--padding);
+  padding: var(--padding);
+}
+
+.avatar {
+  min-width: 160px;
+  max-width: 160px;
+  min-height: 160px;
+  max-height: 160px;
+  border-radius: 50%;
+  margin-bottom: calc(var(--padding) * 2);
+  background-color: gainsboro;
+}
+
+.description {
+  white-space: pre-line;
+}

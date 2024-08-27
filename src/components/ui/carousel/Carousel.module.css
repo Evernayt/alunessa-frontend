@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+}
+
+.viewport {
+  overflow: hidden;
+  margin: 0 24px;
+}
+
+.slides {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+
+.slides * {
+  border-radius: calc(var(--border-radius) * 1.25);
+  padding: calc(var(--padding) / 2);
+}
+
+.slider_button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  margin: 0 calc(var(--padding) * -1);
+  background-color: white;
+}
+
+.slider_button img {
+  width: 24px;
+  height: 24px;
+}
+
+.back {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}

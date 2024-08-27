@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: var(--padding);
+  margin: calc(var(--padding) * 2) 0;
+  flex-wrap: wrap;
+
+  /* Планшеты (портретный режим) */
+  @media (min-width: 767px) and (max-width: 1023px) {
+    margin: calc(var(--padding) * 2) calc(var(--padding) * 6);
+  }
+}

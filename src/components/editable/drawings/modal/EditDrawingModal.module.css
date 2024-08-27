@@ -1,0 +1,65 @@
+.container {
+  height: 70vh;
+  width: 60vw;
+  background-color: white;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  gap: var(--padding);
+  height: calc(100% - 40px);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.image {
+  width: min-content;
+  height: calc(100% - 60px);
+  object-fit: contain;
+}
+
+.form label {
+  margin-bottom: calc(var(--padding) / 4);
+}
+
+.form input {
+  padding: var(--padding);
+  margin-bottom: var(--padding);
+  font-size: 16px;
+}
+
+.form input[type="file"] {
+  padding: 0;
+}
+
+.form textarea {
+  padding: var(--padding);
+  margin-bottom: var(--padding);
+  font-size: 16px;
+  height: 100%;
+  resize: none;
+}
+
+.controls {
+  display: flex;
+  gap: var(--padding);
+  margin-bottom: 0;
+  margin-top: auto;
+}
+
+.form button {
+  padding: var(--padding);
+  font-weight: 600;
+}

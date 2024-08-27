@@ -1,0 +1,61 @@
+.container {
+  width: min-content;
+  height: 100%;
+  position: relative;
+
+  @media (max-width: 767px) {
+    width: 80vw;
+  }
+}
+
+.scroll {
+  height: 100%;
+  overflow-y: auto;
+
+  /* Мобильные телефоны */
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.image {
+  height: 80vh;
+  width: auto;
+  pointer-events: none;
+  border-radius: var(--border-radius);
+
+  /* Мобильные телефоны */
+  @media (max-width: 767px) {
+    height: auto;
+    max-height: 80vh;
+    width: 100%;
+    max-width: min-content;
+  }
+}
+
+.name {
+  color: white;
+  text-align: center;
+  margin: var(--padding);
+}
+
+.description {
+  color: white;
+  text-align: center;
+  white-space: pre-line;
+  margin-bottom: 100px;
+}
+
+.shadow {
+  position: absolute;
+  height: 30px;
+  width: 100%;
+  bottom: -30px;
+  box-shadow: 0 -16px 30px 20px rgba(0, 0, 0, 0.9);
+}

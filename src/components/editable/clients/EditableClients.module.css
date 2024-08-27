@@ -1,0 +1,32 @@
+.loader {
+  height: 50%;
+  min-height: 50%;
+}
+
+.list {
+  display: flex;
+  gap: var(--padding);
+  flex-wrap: wrap;
+  padding: var(--padding);
+  border-top: 3px solid gainsboro;
+}
+
+.dragged {
+  border: 3px solid orange;
+  cursor: grabbing;
+}
+
+.item {
+  user-select: none;
+  cursor: grab;
+}
+
+.item img {
+  pointer-events: none;
+}
+
+.image {
+  width: auto;
+  min-width: 60px;
+  height: 60px;
+}

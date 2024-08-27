@@ -1,0 +1,35 @@
+.container {
+  width: 65%;
+  margin-left: 35%;
+  height: 100vh;
+  padding: var(--padding);
+  overflow-y: auto;
+
+  /* Мобильные телефоны */
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 0;
+    overflow-y: unset;
+    height: auto;
+  }
+
+  /* Планшеты (портретный режим) */
+  @media (min-width: 767px) and (max-width: 1023px) {
+    width: 60%;
+    margin-left: 40%;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+
+.sentry {
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: calc(var(--padding) * 6) 0;
+}

@@ -1,0 +1,18 @@
+.header {
+  padding: var(--padding);
+  background-color: gainsboro;
+}
+
+.header p {
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+
+.controls {
+  display: flex;
+  gap: var(--padding);
+}
+
+.controls button {
+  padding: calc(var(--padding) / 2) var(--padding);
+}

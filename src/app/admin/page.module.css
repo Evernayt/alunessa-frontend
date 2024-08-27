@@ -1,0 +1,19 @@
+.container {
+  display: grid;
+  grid-template-columns: 25% auto 50%;
+}
+
+.column {
+  border-right: 3px solid gainsboro;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.footer button {
+  padding: 0 4px;
+}

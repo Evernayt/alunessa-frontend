@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+
+  /* Мобильные телефоны */
+  @media (max-width: 767px) {
+    display: block;
+    height: auto;
+    margin: calc(var(--padding) * 2) 0;
+  }
+}
+
+.avatar {
+  min-width: 160px;
+  max-width: 160px;
+  min-height: 160px;
+  max-height: 160px;
+  border-radius: 50%;
+  margin-bottom: calc(var(--padding) * 2);
+  float: left;
+
+  /* Мобильные телефоны */
+  @media (max-width: 767px) {
+    min-width: 140px;
+    max-width: 140px;
+    min-height: 140px;
+    max-height: 140px;
+    margin-bottom: 0;
+    margin-right: calc(var(--padding) * 2);
+  }
+}
+
+.description {
+  overflow-y: auto;
+  flex-grow: 1;
+  white-space: pre-line;
+
+  /* Мобильные телефоны */
+  @media (max-width: 767px) {
+    overflow-y: unset;
+    flex-grow: unset;
+  }
+}
+
+.description::-webkit-scrollbar {
+  display: none;
+}

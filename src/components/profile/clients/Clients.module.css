@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  height: auto;
+
+  /* Мобильные телефоны */
+  @media (max-width: 767px) {
+    padding: calc(var(--padding) * 5) calc(var(--padding) * 2);
+  }
+}
+
+.title {
+  text-align: center;
+  margin-bottom: var(--padding);
+}
+
+.image {
+  width: auto;
+  height: 90px;
+}
