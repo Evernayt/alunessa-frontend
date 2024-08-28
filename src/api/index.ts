@@ -1,13 +1,12 @@
-import { SERVER_API_URL } from "@/constants/api";
 import { getToken } from "@/helpers/localStorage";
 import axios from "axios";
 
 const $host = axios.create({
-  baseURL: SERVER_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_SERVER_API_URL,
 });
 
 const $authHost = axios.create({
-  baseURL: SERVER_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_SERVER_API_URL,
 });
 
 const authInterceptor = async (config: any) => {
