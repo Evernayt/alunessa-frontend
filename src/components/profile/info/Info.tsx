@@ -9,8 +9,8 @@ const Info = () => {
     <div className={styles.container}>
       <img
         className={styles.avatar}
-        src={createFileURL("avatar", info?.avatarImageName)}
-        alt=""
+        src={createFileURL("avatar", info?.avatarImageName) || "/avatar.jpg"}
+        alt="avatar"
       />
       <p className={styles.description}>{info?.description}</p>
     </div>

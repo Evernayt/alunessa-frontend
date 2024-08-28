@@ -66,6 +66,7 @@ const Drawings = () => {
                   className={styles.image}
                   src={createFileURL("images", drawing.compressedImageName)}
                   onClick={() => openDrawingModal(drawing)}
+                  alt={drawing.name}
                   key={drawing.id}
                 />
               ))}
