@@ -10,7 +10,9 @@ const Info = () => {
     <div className={styles.container}>
       <Image
         className={styles.avatar}
-        src={createFileURL("avatar", info?.avatar) || "/avatar.jpg"}
+        src={
+          info?.avatar ? createFileURL("avatar", info.avatar) : "/avatar.jpg"
+        }
         width={160}
         height={160}
         alt="avatar"

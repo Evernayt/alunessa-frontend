@@ -23,9 +23,9 @@ export interface IContext extends IModalContext {
     modal: keyof IModalContext,
     props?: Partial<IModalContext[keyof IModalContext]>
   ) => void;
+  closeModal: (modal: keyof IModalContext, props?: Partial<IModalContext[keyof IModalContext]>) => void;
   appIsLoading: boolean;
   setAppIsLoading: (appIsLoading: boolean) => void;
-  closeModal: (modal: keyof IModalContext) => void;
   info: IInfo | null;
   setInfo: (info: IInfo) => void;
   socialNetworks: ISocialNetwork[];

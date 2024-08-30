@@ -83,8 +83,11 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: modal, payload: { isOpen: true, ...props } });
   };
 
-  const closeModal = (modal: keyof IModalContext) => {
-    dispatch({ type: modal, payload: { isOpen: false } });
+  const closeModal = (
+    modal: keyof IModalContext,
+    props?: Partial<IModalContext[keyof IModalContext]>
+  ) => {
+    dispatch({ type: modal, payload: { isOpen: false, ...props } });
   };
 
   const setInfo = (info: IInfo) => {

@@ -72,7 +72,9 @@ const EditableInfo = () => {
       <div className={styles.container}>
         <img
           className={styles.avatar}
-          src={createFileURL("avatar", info?.avatar) || "/avatar.jpg"}
+          src={
+            info?.avatar ? createFileURL("avatar", info.avatar) : "/avatar.jpg"
+          }
           alt=""
         />
         <p className={styles.description}>{info?.description}</p>

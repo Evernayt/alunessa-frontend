@@ -12,7 +12,7 @@ const DrawingModal = () => {
   } = useAppContext();
 
   const closeHandler = () => {
-    closeModal("drawingModal");
+    closeModal("drawingModal", { drawing });
   };
 
   return (
