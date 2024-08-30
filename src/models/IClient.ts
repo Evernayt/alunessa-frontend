@@ -1,6 +1,9 @@
 export interface IClient {
   id: number;
-  originalImageName: string;
-  compressedImageName: string;
-  orderIndex: number;
+  mediumImage: string;
+  smallImage: string;
+  mediumWidth: number;
+  mediumHeight: number;
+  smallWidth: number;
+  smallHeight: number;
 }

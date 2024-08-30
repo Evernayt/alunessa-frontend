@@ -35,9 +35,7 @@ const DrawingContextMenu: FC<DrawingContextMenuProps> = ({ setIsLoading }) => {
     if (confirm("Точно удаляем?")) {
       setIsLoading(true);
       DrawingAPI.delete(drawing.id)
-        .then(() => {
-          deleteDrawing(drawing.id);
-        })
+        .then(() => deleteDrawing(drawing.id))
         .catch((e) => errorHandler("delete drawing", e))
         .finally(() => setIsLoading(false));
     }

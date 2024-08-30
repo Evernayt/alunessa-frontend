@@ -10,6 +10,8 @@ import { useState } from "react";
 import DrawingAPI from "@/api/DrawingAPI/DrawingAPI";
 import { FETCH_MORE_LIMIT } from "@/constants/app";
 import Loader, { LoaderWrapper } from "../ui/loader/Loader";
+import Image from "next/image";
+import { blurHashToDataURL } from "@/helpers/blurhashDataURL";
 import styles from "./Drawings.module.css";
 
 const Drawings = () => {
@@ -62,13 +64,22 @@ const Drawings = () => {
           >
             <Masonry gutter="var(--padding)">
               {drawings.map((drawing) => (
-                <img
-                  className={styles.image}
-                  src={createFileURL("images", drawing.compressedImageName)}
+                <div
+                  className={styles.image_container}
                   onClick={() => openDrawingModal(drawing)}
-                  alt={drawing.name}
                   key={drawing.id}
-                />
+                >
+                  <Image
+                    className={styles.image}
+                    src={createFileURL("images", drawing.smallImage)}
+                    width={drawing.smallWidth}
+                    height={drawing.smallHeight}
+                    priority
+                    placeholder="blur"
+                    blurDataURL={blurHashToDataURL(drawing.blurHash)}
+                    alt={drawing.name}
+                  />
+                </div>
               ))}
             </Masonry>
           </ResponsiveMasonry>

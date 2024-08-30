@@ -1,6 +1,16 @@
 import { $authHost } from "..";
 import { DeleteFileDto } from "./dto/deleteFileDto";
 
+type Image = {
+  mediumImage: string;
+  smallImage: string;
+  mediumWidth: number;
+  mediumHeight: number;
+  smallWidth: number;
+  smallHeight: number;
+  blurHash: string;
+};
+
 export default class FileAPI {
   static async uploadAvatar(file: File): Promise<{ fileName: string }> {
     const formData = new FormData();
@@ -20,9 +30,9 @@ export default class FileAPI {
     return data;
   }
 
-  static async uploadImages(files: FileList | File[]): Promise<{
-    images: { originalFileName: string; compressedFileName: string }[];
-  }> {
+  static async uploadImages(
+    files: FileList | File[]
+  ): Promise<{ images: Image[] }> {
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
       formData.append("files", files[i]);

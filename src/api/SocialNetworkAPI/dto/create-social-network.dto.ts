@@ -1,4 +1,4 @@
 export class CreateSocialNetworkDto {
-  readonly iconImageName?: string;
+  readonly icon?: string;
   readonly url?: string;
 }

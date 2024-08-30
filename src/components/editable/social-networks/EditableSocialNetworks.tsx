@@ -72,7 +72,7 @@ const EditableSocialNetworks = () => {
               onContextMenu={(e) => handleContextMenu(e, socialNetwork)}
             >
               <img
-                src={createFileURL("icons", socialNetwork.iconImageName)}
+                src={createFileURL("icons", socialNetwork.icon)}
                 width={24}
                 height={24}
                 alt=""

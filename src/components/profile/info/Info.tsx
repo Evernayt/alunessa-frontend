@@ -1,5 +1,6 @@
 import { useAppContext } from "@/store/Context";
 import createFileURL from "@/helpers/createFileURL";
+import Image from "next/image";
 import styles from "./Info.module.css";
 
 const Info = () => {
@@ -7,9 +8,11 @@ const Info = () => {
 
   return (
     <div className={styles.container}>
-      <img
+      <Image
         className={styles.avatar}
-        src={createFileURL("avatar", info?.avatarImageName) || "/avatar.jpg"}
+        src={createFileURL("avatar", info?.avatar) || "/avatar.jpg"}
+        width={160}
+        height={160}
         alt="avatar"
       />
       <p className={styles.description}>{info?.description}</p>

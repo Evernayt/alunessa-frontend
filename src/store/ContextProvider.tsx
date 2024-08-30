@@ -52,14 +52,14 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
   const [store, dispatch] = useReducer(reducer, defaultState);
 
   useEffect(() => {
-    try {
-      setAppIsLoading(true);
-      Promise.all([
-        InfoAPI.getOne(),
-        SocialNetworkAPI.getAll(),
-        ClientAPI.getAll(),
-        DrawingAPI.getAll({ limit: FETCH_MORE_LIMIT, page: 1 }),
-      ]).then(([infoData, socialNetworksData, clientsData, drawingsData]) => {
+    setAppIsLoading(true);
+    Promise.all([
+      InfoAPI.getOne(),
+      SocialNetworkAPI.getAll(),
+      ClientAPI.getAll(),
+      DrawingAPI.getAll({ limit: FETCH_MORE_LIMIT, page: 1 }),
+    ])
+      .then(([infoData, socialNetworksData, clientsData, drawingsData]) => {
         setInfo(infoData);
         setSocialNetworks(socialNetworksData);
         setClients(clientsData);
@@ -68,11 +68,8 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
           drawingsData.count / FETCH_MORE_LIMIT
         );
         setDrawingsPageCount(drawingsPageCount);
-      });
-    } catch (error) {
-    } finally {
-      setTimeout(() => setAppIsLoading(false), 600);
-    }
+      })
+      .finally(() => setTimeout(() => setAppIsLoading(false), 600));
   }, []);
 
   const setAppIsLoading = (appIsLoading: boolean) => {

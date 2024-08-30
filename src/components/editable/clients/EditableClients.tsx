@@ -26,24 +26,19 @@ const EditableClients = () => {
     id: CLIENT_CONTEXT_MENU_ID,
   });
 
-  const createClients = (files: FileList) => {
+  const createClients = async (files: FileList) => {
     try {
       setIsLoading(true);
-      FileAPI.uploadImages(files).then((data) => {
-        if (data.images.length > 0) {
-          const createdClients: CreateClientsDto[] = [];
-          data.images.forEach((image) => {
-            createdClients.push({
-              originalImageName: image.originalFileName,
-              compressedImageName: image.compressedFileName,
-            });
-          });
+      const fileData = await FileAPI.uploadImages(files);
+      if (fileData.images.length > 0) {
+        const createdClients: CreateClientsDto[] = [];
+        fileData.images.forEach((image) => {
+          createdClients.push(image);
+        });
 
-          ClientAPI.create(createdClients).then((data2) => {
-            addClients(data2);
-          });
-        }
-      });
+        const clientData = await ClientAPI.create(createdClients);
+        addClients(clientData);
+      }
     } catch (e) {
       errorHandler("create clients", e);
     } finally {
@@ -105,7 +100,7 @@ const EditableClients = () => {
             >
               <img
                 className={styles.image}
-                src={createFileURL("images", client.compressedImageName)}
+                src={createFileURL("images", client.smallImage)}
                 alt=""
               />
             </div>

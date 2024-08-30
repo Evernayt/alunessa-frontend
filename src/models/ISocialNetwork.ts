@@ -1,5 +1,5 @@
 export interface ISocialNetwork {
   id: number;
-  iconImageName: string;
+  icon: string;
   url: string;
 }

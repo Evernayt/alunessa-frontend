@@ -25,7 +25,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  manifest: "/favicon/site.webmanifest",
 };
 
 export default function RootLayout({

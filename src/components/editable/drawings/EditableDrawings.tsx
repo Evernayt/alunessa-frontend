@@ -46,23 +46,18 @@ const EditableDrawings = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const createDrawings = (files: FileList) => {
+  const createDrawings = async (files: FileList) => {
     try {
       setIsLoading(true);
-      FileAPI.uploadImages(files).then((data) => {
-        if (data.images.length > 0) {
-          const createdDrawings: CreateDrawingsDto[] = [];
-          data.images.forEach((image) => {
-            createdDrawings.push({
-              originalImageName: image.originalFileName,
-              compressedImageName: image.compressedFileName,
-            });
-          });
-          DrawingAPI.create(createdDrawings).then((data2) => {
-            addDrawings(data2);
-          });
-        }
-      });
+      const fileData = await FileAPI.uploadImages(files);
+      if (fileData.images.length > 0) {
+        const createdDrawings: CreateDrawingsDto[] = [];
+        fileData.images.forEach((image) => {
+          createdDrawings.push(image);
+        });
+        const drawingData = await DrawingAPI.create(createdDrawings);
+        addDrawings(drawingData);
+      }
     } catch (e) {
       errorHandler("create drawings", e);
     } finally {
@@ -138,7 +133,7 @@ const EditableDrawings = () => {
             >
               <img
                 className={styles.image}
-                src={createFileURL("images", drawing.compressedImageName)}
+                src={createFileURL("images", drawing.smallImage)}
                 key={drawing.id}
               />
             </div>

@@ -1,5 +1,5 @@
 export interface IInfo {
   id: number;
-  avatarImageName: string;
+  avatar: string;
   description: string;
 }

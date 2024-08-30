@@ -21,16 +21,16 @@ const EditableInfo = () => {
     }
     try {
       FileAPI.uploadAvatar(file).then((data) => {
-        const updatedInfo: IInfo = { ...info, avatarImageName: data.fileName };
-        const oldAvatarImageName = info.avatarImageName;
+        const updatedInfo: IInfo = { ...info, avatar: data.fileName };
+        const oldAvatar = info.avatar;
 
         InfoAPI.update(updatedInfo).then(() => {
           setInfo(updatedInfo);
 
-          if (oldAvatarImageName) {
+          if (oldAvatar) {
             FileAPI.deleteFile({
               folder: "avatar",
-              fileNames: [oldAvatarImageName],
+              fileNames: [oldAvatar],
             });
           }
         });
@@ -72,7 +72,7 @@ const EditableInfo = () => {
       <div className={styles.container}>
         <img
           className={styles.avatar}
-          src={createFileURL("avatar", info?.avatarImageName)}
+          src={createFileURL("avatar", info?.avatar) || "/avatar.jpg"}
           alt=""
         />
         <p className={styles.description}>{info?.description}</p>

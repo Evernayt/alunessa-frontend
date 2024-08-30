@@ -4,8 +4,13 @@ export interface IDrawing {
   id: number;
   name: string;
   description: string;
-  originalImageName: string;
-  compressedImageName: string;
+  mediumImage: string;
+  smallImage: string;
+  mediumWidth: number;
+  mediumHeight: number;
+  smallWidth: number;
+  smallHeight: number;
+  blurHash: string;
 }
 
 export type IDrawingData = IData<IDrawing[]>;

@@ -22,7 +22,7 @@ const EditDrawingModal = () => {
     updateDrawing,
   } = useAppContext();
 
-  const create = (e: FormEvent<HTMLFormElement>) => {
+  const create = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formProps = Object.fromEntries(formData);
@@ -32,20 +32,18 @@ const EditDrawingModal = () => {
 
     try {
       setIsLoading(true);
-      FileAPI.uploadImages([file]).then((data) => {
-        if (data.images.length > 0) {
-          const createdDrawing: CreateDrawingsDto = {
-            name,
-            description,
-            compressedImageName: data.images[0].compressedFileName,
-            originalImageName: data.images[0].originalFileName,
-          };
-          DrawingAPI.create([createdDrawing]).then((data2) => {
-            addDrawings(data2);
-            closeHandler();
-          });
-        }
-      });
+      const fileData = await FileAPI.uploadImages([file]);
+      if (fileData.images.length > 0) {
+        const image = fileData.images[0];
+        const createdDrawing: CreateDrawingsDto = {
+          name,
+          description,
+          ...image,
+        };
+        const drawingData = await DrawingAPI.create([createdDrawing]);
+        addDrawings(drawingData);
+        closeHandler();
+      }
     } catch (e) {
       errorHandler("create drawing", e);
     } finally {
@@ -53,7 +51,7 @@ const EditDrawingModal = () => {
     }
   };
 
-  const update = (e: FormEvent<HTMLFormElement>) => {
+  const update = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!drawing) {
@@ -70,38 +68,36 @@ const EditDrawingModal = () => {
     try {
       setIsLoading(true);
       if (file.name) {
-        FileAPI.uploadImages([file]).then((data) => {
-          if (data.images.length > 0) {
-            const updatedDrawing: IDrawing = {
-              ...drawing,
-              name,
-              description,
-              compressedImageName: data.images[0].compressedFileName,
-              originalImageName: data.images[0].originalFileName,
-            };
-            const oldCompressedImageName = drawing.compressedImageName;
-            const oldOriginalImageName = drawing.originalImageName;
-            DrawingAPI.update(updatedDrawing).then(() => {
-              updateDrawing(updatedDrawing);
-              closeHandler();
+        const fileData = await FileAPI.uploadImages([file]);
+        if (fileData.images.length > 0) {
+          const image = fileData.images[0];
+          const updatedDrawing: IDrawing = {
+            ...drawing,
+            name,
+            description,
+            ...image,
+          };
+          const oldMediumImage = drawing.mediumImage;
+          const oldSmallImage = drawing.smallImage;
 
-              FileAPI.deleteFile({
-                folder: "images",
-                fileNames: [oldCompressedImageName, oldOriginalImageName],
-              });
-            });
-          }
-        });
+          await DrawingAPI.update(updatedDrawing);
+          updateDrawing(updatedDrawing);
+          closeHandler();
+
+          FileAPI.deleteFile({
+            folder: "images",
+            fileNames: [oldMediumImage, oldSmallImage],
+          });
+        }
       } else {
         const updatedDrawing: IDrawing = {
           ...drawing,
           name,
           description,
         };
-        DrawingAPI.update(updatedDrawing).then(() => {
-          updateDrawing(updatedDrawing);
-          closeHandler();
-        });
+        await DrawingAPI.update(updatedDrawing);
+        updateDrawing(updatedDrawing);
+        closeHandler();
       }
     } catch (e) {
       errorHandler("update drawing", e);
@@ -145,7 +141,7 @@ const EditDrawingModal = () => {
                   className={styles.image}
                   src={
                     getFileImageSrc(imageFile) ||
-                    createFileURL("images", drawing?.compressedImageName)
+                    createFileURL("images", drawing?.smallImage)
                   }
                   alt=""
                 />

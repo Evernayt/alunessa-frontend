@@ -24,16 +24,11 @@ const ClientContextMenu: FC<ClientContextMenuProps> = ({ setIsLoading }) => {
     }
 
     if (confirm("Точно удаляем?")) {
-      try {
-        setIsLoading(true);
-        ClientAPI.delete(client.id).then(() => {
-          deleteClient(client.id);
-        });
-      } catch (e) {
-        errorHandler("delete client", e);
-      } finally {
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      ClientAPI.delete(client.id)
+        .then(() => deleteClient(client.id))
+        .catch((e) => errorHandler("delete client", e))
+        .finally(() => setIsLoading(false));
     }
   };
 

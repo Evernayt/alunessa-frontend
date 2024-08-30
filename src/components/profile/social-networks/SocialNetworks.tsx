@@ -15,7 +15,7 @@ const SocialNetworks = () => {
       <div className={styles.container}>
         {socialNetworks.map((socialNetwork) => (
           <IconButton
-            icon={createFileURL("icons", socialNetwork.iconImageName)}
+            icon={createFileURL("icons", socialNetwork.icon)}
             onClick={() => openInNewTab(socialNetwork.url)}
             key={socialNetwork.id}
           />

@@ -1,6 +1,8 @@
 import { useAppContext } from "@/store/Context";
 import createFileURL from "@/helpers/createFileURL";
 import DrawerModal from "@/components/ui/drawer-modal/DrawerModal";
+import Image from "next/image";
+import { blurHashToDataURL } from "@/helpers/blurhashDataURL";
 import styles from "./DrawingModal.module.css";
 
 const DrawingModal = () => {
@@ -17,11 +19,17 @@ const DrawingModal = () => {
     <DrawerModal isOpen={isOpen} onClose={closeHandler}>
       <div className={styles.container}>
         <div className={styles.scroll}>
-          <img
-            className={styles.image}
-            src={createFileURL("images", drawing?.originalImageName)}
-            alt=""
-          />
+          {drawing && (
+            <Image
+              className={styles.image}
+              src={createFileURL("images", drawing.mediumImage)}
+              width={drawing.mediumWidth}
+              height={drawing.mediumHeight}
+              placeholder="blur"
+              blurDataURL={blurHashToDataURL(drawing.blurHash)}
+              alt=""
+            />
+          )}
           <h3 className={styles.name}>{drawing?.name}</h3>
           {drawing?.description && (
             <p className={styles.description}>{drawing?.description}</p>

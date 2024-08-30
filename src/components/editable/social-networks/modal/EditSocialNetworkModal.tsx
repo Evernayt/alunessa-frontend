@@ -22,7 +22,7 @@ const EditSocialNetworkModal = () => {
     updateSocialNetwork,
   } = useAppContext();
 
-  const create = (e: FormEvent<HTMLFormElement>) => {
+  const create = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const props = Object.fromEntries(formData);
@@ -31,16 +31,16 @@ const EditSocialNetworkModal = () => {
 
     try {
       setIsLoading(true);
-      FileAPI.uploadIcon(file).then((data) => {
-        const createdSocialNetwork: CreateSocialNetworkDto = {
-          iconImageName: data.fileName,
-          url,
-        };
-        SocialNetworkAPI.create(createdSocialNetwork).then((data2) => {
-          addSocialNetwork(data2);
-          closeHandler();
-        });
-      });
+      const fileData = await FileAPI.uploadIcon(file);
+      const createdSocialNetwork: CreateSocialNetworkDto = {
+        icon: fileData.fileName,
+        url,
+      };
+      const socialNetworkData = await SocialNetworkAPI.create(
+        createdSocialNetwork
+      );
+      addSocialNetwork(socialNetworkData);
+      closeHandler();
     } catch (e) {
       errorHandler("create social-network", e);
     } finally {
@@ -48,7 +48,7 @@ const EditSocialNetworkModal = () => {
     }
   };
 
-  const update = (e: FormEvent<HTMLFormElement>) => {
+  const update = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!socialNetwork) {
@@ -64,32 +64,30 @@ const EditSocialNetworkModal = () => {
     try {
       setIsLoading(true);
       if (file.name) {
-        FileAPI.uploadIcon(file).then((data) => {
-          const updatedSocialNetwork: ISocialNetwork = {
-            ...socialNetwork,
-            iconImageName: data.fileName,
-            url,
-          };
-          const oldIconImageName = socialNetwork.iconImageName;
-          SocialNetworkAPI.update(updatedSocialNetwork).then(() => {
-            updateSocialNetwork(updatedSocialNetwork);
-            closeHandler();
+        const fileData = await FileAPI.uploadIcon(file);
+        const updatedSocialNetwork: ISocialNetwork = {
+          ...socialNetwork,
+          icon: fileData.fileName,
+          url,
+        };
+        const oldIcon = socialNetwork.icon;
 
-            FileAPI.deleteFile({
-              folder: "icons",
-              fileNames: [oldIconImageName],
-            });
-          });
+        await SocialNetworkAPI.update(updatedSocialNetwork);
+        updateSocialNetwork(updatedSocialNetwork);
+        closeHandler();
+
+        FileAPI.deleteFile({
+          folder: "icons",
+          fileNames: [oldIcon],
         });
       } else {
         const updatedSocialNetwork: ISocialNetwork = {
           ...socialNetwork,
           url,
         };
-        SocialNetworkAPI.update(updatedSocialNetwork).then(() => {
-          updateSocialNetwork(updatedSocialNetwork);
-          closeHandler();
-        });
+        await SocialNetworkAPI.update(updatedSocialNetwork);
+        updateSocialNetwork(updatedSocialNetwork);
+        closeHandler();
       }
     } catch (e) {
       errorHandler("update social-network", e);
@@ -120,7 +118,7 @@ const EditSocialNetworkModal = () => {
               <img
                 src={
                   getFileImageSrc(imageFile) ||
-                  createFileURL("icons", socialNetwork?.iconImageName)
+                  createFileURL("icons", socialNetwork?.icon)
                 }
                 width={24}
                 height={24}
